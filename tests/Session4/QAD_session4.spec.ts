@@ -1,9 +1,15 @@
 import { test, expect } from '@playwright/test'
 import { execPath } from 'process';
 
-test('TC001 - Verify Checkboxes', async ({ page }) => 
-{
+test.beforeEach(async ({ page }) => {
+    console.log('beforeEach: Start the page');
     await page.goto('https://the-internet.herokuapp.com/');
+})
+
+//TC1
+test.skip('TC001 - Verify Checkboxes', { tag: '@smkoke' }, async ({ page }) => 
+{
+    //await page.goto('https://the-internet.herokuapp.com/');
     await page.getByRole("link",{name:'Checkboxes'}).click();
     await expect(page.getByRole("heading",{name:'Checkboxes'})).toBeVisible();
 
@@ -18,9 +24,10 @@ test('TC001 - Verify Checkboxes', async ({ page }) =>
     console.log('Checkbox 2 checked:', isChecked); 
 })
 
-test('TC002 - Verify Drag and Drop', async ({ page }) => 
+//TC2
+test('TC002 - Verify Drag and Drop', { tag: '@smkoke' }, async ({ page }) => 
 {
-    await page.goto('https://the-internet.herokuapp.com/');
+    //await page.goto('https://the-internet.herokuapp.com/');
     await page.getByRole("link",{name:'Drag and Drop'}).click();
     await expect(page.getByRole("heading",{name:'Drag and Drop'})).toBeVisible();
     
@@ -36,9 +43,10 @@ test('TC002 - Verify Drag and Drop', async ({ page }) =>
     expect(newcolumnBheader).toBe('A');
 })
 
-test('TC003 - Verify Dropdown', async ({ page }) => 
+//TC3
+test.fail('TC003 - Verify Dropdown', { tag: '@smkoke' }, async ({ page }) => 
 {
-    await page.goto('https://the-internet.herokuapp.com/');
+    //await page.goto('https://the-internet.herokuapp.com/');
     await page.getByRole("link",{name:'Dropdown'}).click();
     await expect(page.getByRole("heading",{name:'Dropdown List'})).toBeVisible();
         
@@ -46,7 +54,9 @@ test('TC003 - Verify Dropdown', async ({ page }) =>
     await expect(page.locator('#dropdown')).toHaveValue('2');
 })
 
-test('TC004 - Verify Frames (alternative)', async ({ page }) => 
+
+//TC4
+test('TC004 - Verify Frames (alternative)', { tag: '@regression' }, async ({ page }) => 
 {
     await page.goto('https://www.globalsqa.com/demo-site/frames-and-windows/');
     await expect(page.getByRole("heading",{name:'Frames And Windows'})).toBeVisible();
@@ -62,9 +72,10 @@ test('TC004 - Verify Frames (alternative)', async ({ page }) =>
     await expect(iframeLocator.locator('ol')).toContainText('Sorry, no posts matched your criteria.');
 })
 
-test('TC005 - Verify Upload file', async ({ page }) => 
+//TC5
+test('TC005 - Verify Upload file', { tag: '@smkoke' }, async ({ page }) => 
 {
-    await page.goto('https://the-internet.herokuapp.com/');
+    //await page.goto('https://the-internet.herokuapp.com/');
     await page.getByRole("link",{name:'File Upload'}).click();
     await expect(page.getByRole("heading",{name:'File Uploader'})).toBeVisible();
 
@@ -73,9 +84,10 @@ test('TC005 - Verify Upload file', async ({ page }) =>
     await expect(page.locator('#uploaded-files')).toContainText('bear.pdf');
 })
 
-test('TC006 - Verify Dynamically Loaded Page Elements', async ({ page }) => 
+//TC6
+test('TC006 - Verify Dynamically Loaded Page Elements', { tag: '@smkoke' }, async ({ page }) => 
 {
-    await page.goto('https://the-internet.herokuapp.com/');
+    //await page.goto('https://the-internet.herokuapp.com/');
     await page.getByRole("link",{name:'Dynamic Loading'}).click();
     await expect(page.getByRole("heading",{name:'Dynamically Loaded Page Elements'})).toBeVisible();
 
@@ -89,7 +101,8 @@ test('TC006 - Verify Dynamically Loaded Page Elements', async ({ page }) =>
     await page.waitForSelector('#finish:has-text("Hello World!")');
 })
 
-test('TC007 - Verify input', async ({ page }) => 
+//TC7
+test('TC007 - Verify input', { tag: '@regression' }, async ({ page }) => 
 {
     await page.goto('https://testautomationpractice.blogspot.com/');
     await expect(page.getByRole("heading",{name:' Automation Testing Practice'})).toBeVisible();
@@ -108,7 +121,8 @@ test('TC007 - Verify input', async ({ page }) =>
     await page.getByLabel('Address:').clear();
 })
 
-test('TC008 - Verify prompt dialog', async ({ page }) => 
+//TC8
+test('TC008 - Verify prompt dialog', { tag: '@regression' }, async ({ page }) => 
 {
     await page.goto('https://testautomationpractice.blogspot.com/');
     await expect(page.getByRole("heading",{name:' Automation Testing Practice'})).toBeVisible();
